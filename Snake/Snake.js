@@ -1,6 +1,6 @@
 alert("FFFFFFFF");
 var velocidad = 100;
-var tamano = 40;
+var tamano = 20;
 
 class objeto {
 	constructor () {
@@ -35,9 +35,27 @@ class cola extends objeto {
 		contexto.fillRect(this.x, this.y, this.tamano, this.tamano);
 	}
 
+	setxy (x, y)
+	{
+		this.x = x;
+		this.y = y;
+	}
+
 }
 
+//objetos del juego
 var cabeza = new cola (20,20);
+var ejex = true;
+var ejey = true;
+var xdir = 0;
+var ydir = 0;
+
+function movimiento () {
+	var newx = cabeza.x + xdir;
+	var newy = cabeza.y + ydir;
+	cabeza.setxy(newx, newy);
+}
+
 
 
 function dibujando () {
@@ -51,6 +69,7 @@ function dibujando () {
 
 function main () {
 	dibujando();
+	movimiento();
 }
 
 setInterval ("main()", velocidad);
