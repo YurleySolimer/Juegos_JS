@@ -22,6 +22,21 @@ class objeto {
 	}
 }
 
+class cola extends objeto {
+	constructor(x,y) {
+		super();
+		this.x = x;
+		this.y = y;
+	}
+
+	dibujar (contexto)
+	{
+		contexto.fillStyle = "0000FF";
+		contexto.fillRect(this.x, this.y, this.tamano, this.tamano);
+	}
+
+}
+
 
 function dibujando () {
 	var d= document.getElementById("juego");
