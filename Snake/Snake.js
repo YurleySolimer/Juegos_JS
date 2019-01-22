@@ -37,12 +37,15 @@ class cola extends objeto {
 
 }
 
+var cabeza = new cola (20,20);
+
 
 function dibujando () {
 	var d= document.getElementById("juego");
 	var lienzo= d.getContext("2d");
 
 	lienzo.clearRect(0, 0, juego.width, juego.height);
+	cabeza.dibujar(lienzo);
 	
 }
 
