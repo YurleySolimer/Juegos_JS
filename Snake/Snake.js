@@ -10,7 +10,7 @@ class objeto {
 		var difx = Math.abs(this.x - obj.x);
 		var dify = Math.abs(this.y - obj.y);
 
-		if (difx >=0 && difx <tamano && dify >=0 && dify <tamano) {
+		if (difx >= 0 && difx < tamano && dify >= 0 && dify < tamano) {
 			return true;
 		}
 		
@@ -54,6 +54,10 @@ class cola extends objeto {
 		else {
 			this.siguiente.agregar();
 		}
+	}
+
+	verSiguiente () {
+		this.siguiente;
 	}
 }
 
@@ -128,6 +132,42 @@ function controlTeclas (event) {
 	}
 }
 
+function finDeJuego () {
+	xdir = 0;
+	ydir = 0;
+	ejey = true;
+	ejex = true;
+	cabeza = new cola (20,20);
+	coma = new comida();
+
+	alert ("GAME OVER");
+}
+
+function choquePared () {
+	if (cabeza.x  < 0 || cabeza.x > 590 || cabeza.y < 0 || cabeza.y > 590) {
+		finDeJuego();
+	}
+}
+
+function choqueCuerpo () {
+	var temp = null;
+	try {
+		temp = cabeza.verSiguiente().verSiguiente();
+	} catch (err) {
+		temp = null;
+	}
+
+	while (temp != null) {
+		if (cabeza.choque(temp)) {
+			finDeJuego();
+		}
+
+		else {
+			temp = temp.verSiguiente();
+		}
+	}
+}
+
 function dibujando () {
 	var d = document.getElementById("juego");
 	var lienzo = d.getContext("2d");
@@ -138,6 +178,8 @@ function dibujando () {
 }
 
 function main () {
+	choqueCuerpo ();
+	choquePared ();
 	dibujando ();
 	movimiento ();
 
