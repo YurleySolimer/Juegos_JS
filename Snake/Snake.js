@@ -25,16 +25,35 @@ class cola extends objeto {
 		super();
 		this.x = x;
 		this.y = y;
+		this.siguiente = null;
 	}
 
 	dibujar (contexto) {
+		if (this.siguiente != null) {
+			this.siguiente.dibujar(contexto);
+		}
+
 		contexto.fillStyle = "blue";
 		contexto.fillRect(this.x, this.y, this.tamano, this.tamano);
 	}
 
 	setxy (x, y) {
+		if (this.siguiente != null) {
+			this.siguiente.setxy (this.x, this.y);
+		}
+
 		this.x = x;
 		this.y = y;
+	}
+
+	agregar () {
+		if (this.siguiente == null) {
+			this.siguiente = new cola (this.x, this.y);
+		}
+
+		else {
+			this.siguiente.agregar();
+		}
 	}
 }
 
@@ -115,16 +134,20 @@ function dibujando () {
 
 	lienzo.clearRect(0, 0, juego.width, juego.height);
 	cabeza.dibujar(lienzo);
-	coma.dibujar(lienzo);
-	
+	coma.dibujar (lienzo);
 }
 
 function main () {
-	dibujando();
-	movimiento();
+	dibujando ();
+	movimiento ();
+
+	if (cabeza.choque (coma)) {
+		coma.colocar ();
+		cabeza.agregar ();
+	}
 }
 
-setInterval ("main()", velocidad);
+setInterval ("main ()", velocidad);
 
 
 
