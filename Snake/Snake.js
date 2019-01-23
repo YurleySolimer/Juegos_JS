@@ -27,22 +27,43 @@ class cola extends objeto {
 		this.y = y;
 	}
 
-	dibujar (contexto)
-	{
+	dibujar (contexto) {
 		contexto.fillStyle = "blue";
 		contexto.fillRect(this.x, this.y, this.tamano, this.tamano);
 	}
 
-	setxy (x, y)
-	{
+	setxy (x, y) {
 		this.x = x;
 		this.y = y;
 	}
+}
 
+class comida extends objeto {
+	constructor () {
+		super();
+		this.x = this.generar();
+		this.y = this.generar();
+	}
+
+	generar () {
+		var aleatorio = (Math.floor(Math.random() * 59 )) * 10;
+		return aleatorio;
+	}
+
+	colocar () {
+		this.x = this.generar();
+		this.y = this.generar();		
+	}
+
+	dibujar (contexto) {
+		contexto.fillStyle = "red";
+		contexto.fillRect (this.x, this.y, this.tamano, this.tamano);
+	}
 }
 
 //objetos del juego
 var cabeza = new cola (40,40);
+var coma = new comida ();
 var ejex = true;
 var ejey = true;
 var xdir = 0;
@@ -94,6 +115,7 @@ function dibujando () {
 
 	lienzo.clearRect(0, 0, juego.width, juego.height);
 	cabeza.dibujar(lienzo);
+	coma.dibujar(lienzo);
 	
 }
 
