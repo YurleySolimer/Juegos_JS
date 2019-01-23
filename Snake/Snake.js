@@ -57,7 +57,7 @@ class cola extends objeto {
 	}
 
 	verSiguiente () {
-		this.siguiente;
+		return this.siguiente;
 	}
 }
 
@@ -151,19 +151,18 @@ function choquePared () {
 
 function choqueCuerpo () {
 	var temp = null;
-	try {
-		temp = cabeza.verSiguiente().verSiguiente();
-	} catch (err) {
+	try{
+		temp = cabeza.verSiguiente ().verSiguiente ();
+	} catch(err){
 		temp = null;
 	}
-
-	while (temp != null) {
-		if (cabeza.choque(temp)) {
+	while(temp != null){
+		if(cabeza.choque(temp)){
+			//fin de juego
 			finDeJuego();
-		}
-
+		} 
 		else {
-			temp = temp.verSiguiente();
+			temp = temp.verSiguiente ();
 		}
 	}
 }
