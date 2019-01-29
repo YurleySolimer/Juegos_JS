@@ -54,19 +54,31 @@ class Bola extends Base {
 		this.choqueV ();
 		this.choqueH ();
 	}
+
+	dibujar () {
+		ctx.fillRect (this.x, this.y, this.t, this.t);
+	}
 }
+
+//Objetos
+
+var bola = new Bola ();
 
 
 function dibujar () {
 	ctx.clearRect (0, 0, areaW, areaH);
+	bola.dibujar ();
 
 }
 
 function frame () {
+	dibujar ();
+	bola.mover ();
 	bucle = requestAnimationFrame(frame);
-
 }
 
 function iniciar () {
+	var modal = document.getElementById ("modal");
+	modal.style.display = "none";
 	frame ();
 }
